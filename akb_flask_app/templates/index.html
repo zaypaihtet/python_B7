@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+
+        <title>My Portfolio</title>
+    </head>
+    <body>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/projects">Projects</a>
+            <a href="/github">Github</a>
+        </nav>
+        <section class="hero">
+            <img
+                src="{{ url_for('static', filename='profile_pic.jpg') }}"
+                alt="Profile Photo"
+            />
+            <h1>Hello World<span> I am Alexander Aung Khant Bwar</span></h1>
+            <p>
+                ML Engineer | Flask Developer | Web Enthusiast | Python Learner
+            </p>
+        </section>
+    </body>
+</html>
