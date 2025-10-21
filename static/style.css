@@ -1,0 +1,37 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+
+}
+nav{
+    background-color: #222;
+    padding: 10px;
+    text-align: center;
+    /* color: #fefefe; */
+}
+nav a{
+    color: #f4f4f4;
+    text-decoration: solid;
+    margin: 0 15px;
+
+}
+nav a.active,nav a:hover{
+    color: cyan;
+}
+.hero{
+    text-align: center;
+    margin-top: 50px;
+}
+.hero img{
+    width: 120px;
+    border-radius: 50%;
+}
+h1 span {
+    color: #00bcd4;
+}
+section {
+    padding: 20px;
+    text-align: center;
+}

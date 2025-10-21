@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>My Portfolio</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/projects">Projects</a>
+    </nav>
+<section class="hero">
+    <img src="{{ url_for('static', filename='profile.jpg') }}" alt="Profile Photo">
+    <h1>Hello I'm <span>Zay Pai Htet</span></h1>
+     <p>Flask Developer | Web Enthusiast | Python Learner</p>
+</section>
+</body>
+</html>
