@@ -14,5 +14,3 @@ CREATE TABLE admin (
 );
 
 INSERT INTO admin (username, password) VALUES ('admin', 'admin123');
-
-test_db_1

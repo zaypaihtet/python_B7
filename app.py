@@ -17,11 +17,15 @@ def home():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
+    
 @app.route('/projects')
 def projects():
-    return render_template('projects.html')
-
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM projects ORDER BY date DESC")
+    projects = cur.fetchall()
+    conn.close()
+    return render_template('projects.html', projects=projects)
 @app.route('/contact',methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
@@ -55,8 +59,8 @@ def admin_login():
         else:
             flash("Invalid credentials!", "danger")
     return render_template('admin_login.html')
-@app.route('/dashboard')
-def dashboard():
+@app.route('/admin/message')
+def message():
     if 'admin' not in session:
         return redirect(url_for('admin_login'))
     conn = get_db_connection()
@@ -65,7 +69,72 @@ def dashboard():
     messages = cur.fetchall()
     conn.close()
 
-    return render_template('dashboard.html', messages=messages)
+    return render_template('message.html', messages=messages)
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+@app.route('/admin/projects')
+def admin_projects():
+    if 'admin' not in session:
+        return redirect(url_for('admin_login'))
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM projects ORDER BY date DESC")
+    projects = cur.fetchall()
+    conn.close()
+    return render_template('admin_projects.html', projects=projects)
+
+@app.route('/admin/project/add', methods=['GET', 'POST'])
+def add_project():
+    if 'admin' not in session:
+        return redirect(url_for('admin_login'))
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        image = request.form['image']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO projects (title, description, image) VALUES (%s, %s, %s)",
+                    (title, description, image))
+        conn.commit()
+        conn.close()
+        flash("Project added successfully!", "success")
+        return redirect(url_for('admin_projects'))
+    return render_template('add_project.html')
+
+@app.route('/admin/project/edit/<int:id>', methods=['GET', 'POST'])
+def edit_project(id):
+    if 'admin' not in session:
+        return redirect(url_for('admin_login'))
+    conn = get_db_connection()
+    cur = conn.cursor()
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        image = request.form['image']
+        cur.execute("UPDATE projects SET title=%s, description=%s, image=%s WHERE id=%s",
+                    (title, description, image, id))
+        conn.commit()
+        flash("Project updated!", "info")
+        conn.close()
+        return redirect(url_for('admin_projects'))
+    cur.execute("SELECT * FROM projects WHERE id=%s", (id,))
+    project = cur.fetchone()
+    conn.close()
+    return render_template('edit_project.html', project=project)
+
+@app.route('/admin/project/delete/<int:id>')
+def delete_project(id):
+    if 'admin' not in session:
+        return redirect(url_for('admin_login'))
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM projects WHERE id=%s", (id,))
+    conn.commit()
+    conn.close()
+    flash("Project deleted!", "danger")
+    return redirect(url_for('admin_projects'))
+
 
 @app.route('/logout')
 def logout():

@@ -1,280 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Contact Messages</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Portfolio</title>
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-    <!-- AOS Animation CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ====== BASE STYLES ====== */
-        body {
-            font-family: "Poppins", sans-serif;
-            background: linear-gradient(135deg, #141e30, #243b55);
-            color: #fff;
-            min-height: 100vh;
-            padding: 40px 20px;
-            transition: background 0.5s, color 0.5s;
-        }
-
-        /* ====== LIGHT MODE ====== */
-        body.light-mode {
-            background: #f8f9fa;
-            color: #212529;
-        }
-
-        .dashboard-container {
-            max-width: 1200px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            overflow-x: auto;
-            transition: background 0.5s;
-        }
-
-        body.light-mode .dashboard-container {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            text-align: center;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        /* ====== BUTTONS ====== */
-        .logout-btn {
-            float: right;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
-            border: none;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: linear-gradient(to right, #ff4b2b, #ff416c);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
-        }
-
-        .toggle-theme {
-            background: linear-gradient(to right, #0072ff, #00c6ff);
-            border: none;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .toggle-theme:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
-        }
-
-        /* ====== TABLE ====== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        thead {
-            background: linear-gradient(to right, #00c6ff, #0072ff);
-        }
-
-        th {
-            font-weight: 600;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        tr:hover {
-            background-color: rgba(0, 198, 255, 0.15);
-            transform: scale(1.01);
-            box-shadow: 0 0 10px rgba(0,198,255,0.3);
-            transition: 0.3s ease;
-        }
-
-        td {
-            color: #eee;
-        }
-
-        body.light-mode th {
-            color: #fff;
-        }
-
-        body.light-mode td {
-            color: #212529;
-        }
-
-        /* ====== SEARCH BAR ====== */
-        .search-bar input {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            padding: 10px 15px;
-            width: 100%;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-bar input:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #00c6ff;
-        }
-
-        body.light-mode .search-bar input {
-            background: #fff;
-            color: #212529;
-            border-color: #ccc;
-        }
-
-        .footer-text {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 13px;
-            color: #ccc;
-        }
-
-        body.light-mode .footer-text {
-            color: #666;
-        }
-
-        .breadcrumb a {
-            color: #00d4ff;
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .logout-btn, .toggle-theme {
-                float: none;
-                display: block;
-                width: 100%;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Poppins", sans-serif;
+      overflow-x: hidden;
+    }
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: linear-gradient(180deg, #0d6efd, #6610f2);
+      color: #fff;
+      padding-top: 1rem;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .sidebar.collapsed {
+      width: 80px;
+    }
+    .sidebar .nav-link {
+      color: #fff;
+      margin: 8px 0;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .sidebar .nav-link span {
+      margin-left: 10px;
+    }
+    .sidebar.collapsed .nav-link span {
+      display: none;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+    .main-content.collapsed {
+      margin-left: 80px;
+    }
+    .card {
+      border: none;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="dashboard-container" data-aos="fade-up" data-aos-duration="800">
-        
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>📩 Admin Dashboard</h2>
-            <div>
-                <a href="#" id="toggleTheme" class="toggle-theme me-2">🌗 Toggle Theme</a>
-                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-            </div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="text-center mb-4">
+      <h4 class="fw-bold animate__animated animate__fadeIn">Portfolio Admin</h4>
+    </div>
+    <ul class="nav flex-column px-3">
+      <li class="nav-item">
+        <a href="dashboard.html" class="nav-link active"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
+      </li>
+      <li class="nav-item">
+        <a href="/admin/projects" class="nav-link"><i class="bi bi-folder2-open"></i><span>Projects</span></a>
+      </li>
+      <li class="nav-item">
+        <a href="admin_blogs.html" class="nav-link"><i class="bi bi-journal-text"></i><span>Blogs</span></a>
+      </li>
+      <li class="nav-item">
+        <a href="/admin/message" class="nav-link"><i class="bi bi-gear"></i><span>Message</span></a>
+      </li>
+      <li class="nav-item mt-3">
+        <a href="/logout" class="nav-link text-warning"><i class="bi bi-box-arrow-right"></i><span>Logout</span></a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-white shadow-sm mb-4 rounded px-3">
+      <button class="btn btn-outline-primary" id="toggleSidebar"><i class="bi bi-list"></i></button>
+      <h5 class="mb-0">Dashboard Overview</h5>
+      <div class="d-flex align-items-center">
+        <i class="bi bi-person-circle fs-4 me-2"></i>
+        <span>Admin</span>
+      </div>
+    </nav>
+
+    <!-- Dashboard Stats -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center p-3 animate__animated animate__fadeInUp">
+          <div class="card-body">
+            <i class="bi bi-folder-fill fs-1 text-primary"></i>
+            <h5 class="mt-3">Projects</h5>
+            <h3>12</h3>
+          </div>
         </div>
-
-        <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb" data-aos="fade-down" data-aos-delay="100">
-            <ol class="breadcrumb bg-transparent text-light">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Contact Messages</li>
-            </ol>
-        </nav>
-
-        <!-- Search Bar -->
-        <div class="search-bar mb-4" data-aos="fade-down" data-aos-delay="200">
-            <input type="text" id="searchBox" placeholder="🔍 Search messages...">
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center p-3 animate__animated animate__fadeInUp animate__delay-1s">
+          <div class="card-body">
+            <i class="bi bi-journal-text fs-1 text-success"></i>
+            <h5 class="mt-3">Blogs</h5>
+            <h3>8</h3>
+          </div>
         </div>
-
-        <!-- Table -->
-        <div class="table-responsive" data-aos="fade-up" data-aos-delay="300">
-            <table class="table table-borderless align-middle">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Subject</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for msg in messages %}
-                    <tr>
-                        <td>{{ msg.id }}</td>
-                        <td>{{ msg.name }}</td>
-                        <td>{{ msg.email }}</td>
-                        <td>{{ msg.subject }}</td>
-                        <td>{{ msg.message }}</td>
-                        <td>{{ msg.date }}</td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="6" class="text-center text-secondary py-4">No messages found.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center p-3 animate__animated animate__fadeInUp animate__delay-2s">
+          <div class="card-body">
+            <i class="bi bi-eye-fill fs-1 text-info"></i>
+            <h5 class="mt-3">Visitors</h5>
+            <h3>3.2K</h3>
+          </div>
         </div>
-
-        <!-- Footer -->
-        <p class="footer-text mt-4" data-aos="fade-up" data-aos-delay="400">
-            © 2025 Admin Dashboard | Designed with 💙 using Flask & Bootstrap
-        </p>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card text-center p-3 animate__animated animate__fadeInUp animate__delay-3s">
+          <div class="card-body">
+            <i class="bi bi-chat-dots fs-1 text-warning"></i>
+            <h5 class="mt-3">Comments</h5>
+            <h3>56</h3>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Charts -->
+    <div class="card shadow-sm p-4 animate__animated animate__fadeInUp">
+      <h5 class="mb-3">Monthly Portfolio Activity</h5>
+      <canvas id="portfolioChart" height="120"></canvas>
+    </div>
+  </div>
 
-    <!-- AOS Animation JS -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Sidebar toggle
+    document.getElementById("toggleSidebar").addEventListener("click", () => {
+      document.getElementById("sidebar").classList.toggle("collapsed");
+      document.getElementById("mainContent").classList.toggle("collapsed");
+    });
 
-    <script>
-        AOS.init();
-
-        // ====== SEARCH FUNCTION ======
-        const searchBox = document.getElementById("searchBox");
-        searchBox.addEventListener("keyup", function() {
-            const searchText = this.value.toLowerCase();
-            const rows = document.querySelectorAll("tbody tr");
-            rows.forEach(row => {
-                row.style.display = row.textContent.toLowerCase().includes(searchText) ? "" : "none";
-            });
-        });
-
-        // ====== THEME TOGGLE ======
-        document.getElementById("toggleTheme").addEventListener("click", function(e) {
-            e.preventDefault();
-            document.body.classList.toggle("light-mode");
-        });
-    </script>
+    // Chart.js demo chart
+    const ctx = document.getElementById("portfolioChart");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        datasets: [{
+          label: "Projects Published",
+          data: [3, 4, 2, 6, 5, 7, 8],
+          borderColor: "#0d6efd",
+          backgroundColor: "rgba(13, 110, 253, 0.2)",
+          tension: 0.3,
+          fill: true
+        },
+        {
+          label: "Blog Posts",
+          data: [2, 3, 1, 5, 4, 6, 7],
+          borderColor: "#6610f2",
+          backgroundColor: "rgba(102, 16, 242, 0.2)",
+          tension: 0.3,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
